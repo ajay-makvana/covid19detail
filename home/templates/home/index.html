@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1 align='center'>INDIA Covid19 StateWise</h1>
+    <table id='covidtable' align="center" style="width: auto;" class="table table-bordered border-primary table-hover">
+        <thead>
+            <tr>
+                <th scope="col">State</th>
+                <th scope="col">Active</th>
+                <th scope="col">Recover</th>
+                <th scope="col">Deaths</th>
+                <th scope="col">Total</th>
+                <th scope="col">Last Updated</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</body>
+
+<script>
+    let url = "https://api.covid19india.org/data.json";
+
+    async function getapi(url) {
+        const response = await fetch(url);
+        var data = await response.json();
+        //console.log(data);
+        for (var {
+                state: s,
+                active: a,
+                recovered: r,
+                confirmed: c,
+                deaths: d,
+                lastupdatedtime: l,
+            }
+            of data.statewise)
+            if (s == 'Total' | s == 'State Unassigned') {
+                if (s == 'Total') {
+                    endrows = "";
+                    endrows += "<tr><th>" + s + "</th><th>" + a + "</th><th>" + r + "</th><th>" + d + "</th><th>" + c + "</th><th>" + l + "</th></tr>";
+                }
+            } else {
+                rows = "";
+                rows += "<tr><th scope='row'>" + s + "</th><td>" + a + "</td><td>" + r + "</td><td>" + d + "</td><td>" + c + "</td><td>" + l + "</td></tr>";
+                $(rows).appendTo("#covidtable tbody");
+            }
+        $(endrows).appendTo("#covidtable tfoot");
+    }
+
+    getapi(url);
+</script>
+
+</html>
