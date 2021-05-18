@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INDIA COVID19 STATEWISE</title>
+    <title>INDIA COVID-19 StateWise</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
@@ -13,7 +12,7 @@
 </head>
 
 <body>
-    <h1 align='center'>INDIA COVID19 STATEWISE</h1>
+    <h1 align='center'>INDIA COVID-19 StateWise</h1>
     <table id='covidtable' align="center" style="width: auto;" class="table table-bordered border-primary table-hover">
         <thead>
             <tr>
@@ -55,7 +54,7 @@
                 }
             } else {
                 rows = "";
-                rows += "<tr><th scope='row'>" + s + "</th><td>" + a + "</td><td>" + r + "</td><td>" + d + "</td><td>" + c + "</td><td>" + l + "</td></tr>";
+                rows += '<tr><th scope="row"><a href = "DistrictWise/' + s + ' ">' + s + '</a></th><td>' + a + '</td><td>' + r + '</td><td>' + d + '</td><td>' + c + '</td><td>' + l + '</td></tr>';
                 $(rows).appendTo("#covidtable tbody");
             }
         $(endrows).appendTo("#covidtable tfoot");

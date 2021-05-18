@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{state}} COVID-19 DistrictWise</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<body>
+    <h1 align='center'>{{state}} COVID-19 DistrictWise</h1>
+    <table id='covidtable' align="center" style="width: auto;" class="table table-bordered border-primary table-hover">
+        <thead>
+            <tr>
+                <th scope="col">District</th>
+                <th scope="col">Active</th>
+                <th scope="col">Recover</th>
+                <th scope="col">Deaths</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+        </tfoot>
+    </table>
+</body>
+
+<script>
+    let url = "https://api.covid19india.org/state_district_wise.json";
+    let state = "{{state}}";
+    async function getdata(url) {
+        const response = await fetch(url);
+        var data = await response.json();
+        district = data[state]["districtData"];
+        for (i in district) {
+            rows = "";
+            rows += "<tr><th scope='row'>" + i + "</th><td>" + district[i].active + "</td><td>" + district[i].recovered + "</td><td>" + district[i].deceased + "</td><td>" + district[i].confirmed + "</td></tr>";
+            $(rows).appendTo("#covidtable tbody");
+        }
+    }
+    getdata(url);
+</script>
+
+</html>
