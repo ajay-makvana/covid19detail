@@ -17,9 +17,6 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-app_name = 'home'
-
 urlpatterns = [
     path('',views.home,name='home'),
-    path('DistrictWise/<str:state>',views.DistrictWise,name='DistrictWise'),
 ]
